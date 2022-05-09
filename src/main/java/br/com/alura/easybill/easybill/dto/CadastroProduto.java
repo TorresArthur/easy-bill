@@ -1,22 +1,26 @@
-package br.com.alura.easybill.easybill;
+package br.com.alura.easybill.easybill.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import br.com.alura.easybill.easybill.model.Product;
+
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
-@Entity
-public class Product {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class CadastroProduto {
+    @NotBlank
+    @Size(max = 150)
     private String nome;
+    @NotBlank
+    @Size(max = 500)
     private String urlImagem;
+    @Size(max = 1000)
     private String descricao;
-    private BigDecimal preco;
+    @NotNull @Positive
+    private  BigDecimal preco;
+    @Positive
     private BigDecimal precoPromocional;
+    @Pattern(regexp= "[0-9]{4}[\\.][0-9]{2}[\\.][0-9]{2}")
     private String classeFiscal;
+
 
     public String getNome() {
         return nome;
@@ -66,4 +70,14 @@ public class Product {
         this.classeFiscal = classeFiscal;
     }
 
+    public Product toProduto(){
+        Product product = new Product();
+        product.setClasseFiscal(classeFiscal);
+        product.setDescricao(descricao);
+        product.setPreco(preco);
+        product.setNome(nome);
+        product.setPrecoPromocional(precoPromocional);
+        product.setUrlImagem(urlImagem);
+        return product;
+    }
 }
