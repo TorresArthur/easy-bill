@@ -7,6 +7,25 @@
         <meta charset="UTF-8">
         <title>Title</title>
     </head>
+
+    <div class="container">
+
+    <div class="card mb-3" th:each="productList : ${produtos}">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12 col-sm-8 mb-3">
+                    <div class="row ">
+                        <div class="col-md-5"><b>ID</b>: <span th:text="${productList.id}">NOME DO PRODUTO</span></div>
+                        <div class="col-md-5">Nome: <span th:text="${productList.nome}">NOME DO PRODUTO</span></div>
+                        <div class="col-md-5">Valor: <span th:text="${productList.preco}">PRECO DO PRODUTO</span></div>
+                        <div class="col-md-5">Classe Fiscal: <span th:text="${productList.classeFiscal}">NOME DO PRODUTO</span></div>
+                        <div class="card-text">Descrição: <span th:text="${productList.descricao} ">NOME DO PRODUTO</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
     <body>
     <a href="/admin/produtos/formulario"><button class="btn btn-outline-secondary my-2 my-sm-0">Novo</button></a>
     <a href="/api/produtos"><button class="btn btn-outline-secondary my-2 my-sm-0">Lista de Produtos</button></a>

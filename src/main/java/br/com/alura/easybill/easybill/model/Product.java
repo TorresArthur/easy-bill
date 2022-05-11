@@ -1,9 +1,8 @@
 package br.com.alura.easybill.easybill.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import br.com.alura.easybill.easybill.repository.ProductRepository;
+
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
@@ -13,6 +12,8 @@ public class Product {
 
     private String nome;
     private String urlImagem;
+
+    @Column(length = 1337)
     private String descricao;
     private BigDecimal preco;
     private BigDecimal precoPromocional;
@@ -46,7 +47,15 @@ public class Product {
         this.descricao = descricao;
     }
 
-    public BigDecimal getPreco() {
+    public BigDecimal getPrecoFinal() {
+        if(precoPromocional == null){
+            return preco;
+        }else{
+            return precoPromocional;
+        }
+    }
+
+    public BigDecimal getPreco(){
         return preco;
     }
 
@@ -70,4 +79,14 @@ public class Product {
         this.classeFiscal = classeFiscal;
     }
 
+    public void atualizar(Long id, ProductRepository productRepository){
+       Product product = productRepository.findById(id).get();
+       product.setNome(this.nome);
+       product.setUrlImagem(this.urlImagem);
+       product.setPreco(this.preco);
+       product.setClasseFiscal(this.classeFiscal);
+       product.setPrecoPromocional(this.precoPromocional);
+       product.setDescricao(this.descricao);
+       productRepository.save(product);
+    }
 }

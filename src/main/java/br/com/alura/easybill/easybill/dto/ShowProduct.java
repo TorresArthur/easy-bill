@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductList {
+public class ShowProduct {
     private Long id;
     private String nome;
     private String descricao;
@@ -35,7 +35,11 @@ public class ProductList {
     }
 
     public void setDescricao(String descricao) {
-        this.descricao = descricao;
+        if (descricao.length() < 250){
+            this.descricao = descricao;
+        }else{
+           this.descricao = descricao.substring(0, 250) + "...";
+        }
     }
 
     public BigDecimal getPreco() {
@@ -43,7 +47,7 @@ public class ProductList {
     }
 
     public void setPreco(BigDecimal preco) {
-        this.preco = preco;
+       this.preco = preco;
     }
 
     public String getClasseFiscal() {
@@ -54,16 +58,27 @@ public class ProductList {
         this.classeFiscal = classeFiscal;
     }
 
-    public static List<ProductList> converte(List<Product> lista){
+
+    public static ShowProduct oneProductList(Product product){
+        ShowProduct productList = new ShowProduct();
+        productList.setId(product.getId());
+        productList.setNome(product.getNome());
+        productList.setClasseFiscal(product.getClasseFiscal());
+        productList.setDescricao(product.getDescricao());
+        productList.setPreco(product.getPrecoFinal());
+        return productList;
+    }
+
+    public static List<ShowProduct> toProductList(List<Product> lista){
         //lista.stream().map().collect(Collectors.toList());
-        List<ProductList> listaForm = new ArrayList<>();
+        List<ShowProduct> listaForm = new ArrayList<>();
         for (Product product : lista){
-            ProductList productList = new ProductList();
+            ShowProduct productList = new ShowProduct();
             productList.setId(product.getId());
             productList.setNome(product.getNome());
             productList.setClasseFiscal(product.getClasseFiscal());
             productList.setDescricao(product.getDescricao());
-            productList.setPreco(product.getPreco());
+            productList.setPreco(product.getPrecoFinal());
             listaForm.add(productList);
         }
         return listaForm;
