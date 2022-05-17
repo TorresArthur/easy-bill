@@ -3,8 +3,8 @@ package br.com.alura.easybill.easybill.dto;
 import br.com.alura.easybill.easybill.model.Product;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ShowProduct {
     private Long id;
@@ -59,7 +59,7 @@ public class ShowProduct {
     }
 
 
-    public static ShowProduct oneProductList(Product product){
+    public static ShowProduct toShowProduct(Product product){
         ShowProduct productList = new ShowProduct();
         productList.setId(product.getId());
         productList.setNome(product.getNome());
@@ -69,20 +69,16 @@ public class ShowProduct {
         return productList;
     }
 
-    public static List<ShowProduct> toProductList(List<Product> lista){
-        //lista.stream().map().collect(Collectors.toList());
-        List<ShowProduct> listaForm = new ArrayList<>();
-        for (Product product : lista){
-            ShowProduct productList = new ShowProduct();
-            productList.setId(product.getId());
-            productList.setNome(product.getNome());
-            productList.setClasseFiscal(product.getClasseFiscal());
-            productList.setDescricao(product.getDescricao());
-            productList.setPreco(product.getPrecoFinal());
-            listaForm.add(productList);
-        }
-        return listaForm;
+    public static List<ShowProduct> toShowProductList(List<Product> produtos){
+
+       return produtos.stream().map(product -> {
+            ShowProduct showProduct = new ShowProduct();
+            showProduct.setId(product.getId());
+            showProduct.setNome(product.getNome());
+            showProduct.setClasseFiscal(product.getClasseFiscal());
+            showProduct.setDescricao(product.getDescricao());
+            showProduct.setPreco(product.getPrecoFinal());
+            return showProduct;
+        }).collect(Collectors.toList());
     }
-
-
 }

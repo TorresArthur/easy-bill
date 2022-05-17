@@ -5,20 +5,26 @@ import br.com.alura.easybill.easybill.model.Product;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
-public class CadastroProduto {
+public class CadastroRequest {
     @NotBlank
     @Size(max = 150)
     private String nome;
+
     @NotBlank
     @Size(max = 500)
     private String urlImagem;
+
     @Size(max = 1000)
     private String descricao;
-    @NotNull @Positive
-    private  BigDecimal preco;
+
+    @NotNull
     @Positive
+    private BigDecimal preco;
+
+    @Positive //@Max(preco)
     private BigDecimal precoPromocional;
-    @Pattern(regexp= "[0-9]{4}[\\.][0-9]{2}[\\.][0-9]{2}")
+
+    @Pattern(regexp = "[0-9]{4}[\\.][0-9]{2}[\\.][0-9]{2}")
     private String classeFiscal;
 
 
@@ -70,7 +76,7 @@ public class CadastroProduto {
         this.classeFiscal = classeFiscal;
     }
 
-    public Product toProduto(){
+    public Product toProduto() {
         Product product = new Product();
         product.setClasseFiscal(classeFiscal);
         product.setDescricao(descricao);

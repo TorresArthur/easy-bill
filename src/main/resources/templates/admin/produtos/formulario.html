@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class = container>
-    <form  th:object="${cadastroProduto}" action="/admin/produtos" method="POST">
+    <form  th:object="${cadastroRequest}" action="/admin/produtos" method="POST">
         <div class="mb-3">
             <label for="nome">Nome do Produto:</label>
             <input th:field="*{nome}" th:errorClass="is-invalid" id="nome"  type="text" class="form-control"  placeholder="Digite aqui o nome do produto">

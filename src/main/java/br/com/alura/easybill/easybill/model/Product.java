@@ -1,5 +1,6 @@
 package br.com.alura.easybill.easybill.model;
 
+import br.com.alura.easybill.easybill.dto.CadastroResponse;
 import br.com.alura.easybill.easybill.repository.ProductRepository;
 
 import javax.persistence.*;
@@ -79,6 +80,8 @@ public class Product {
         this.classeFiscal = classeFiscal;
     }
 
+
+
     public void atualizar(Long id, ProductRepository productRepository){
        Product product = productRepository.findById(id).get();
        product.setNome(this.nome);
@@ -89,4 +92,16 @@ public class Product {
        product.setDescricao(this.descricao);
        productRepository.save(product);
     }
+
+
+    public CadastroResponse toCadastroResponse() {
+        CadastroResponse cadastroResponse = new CadastroResponse();
+        cadastroResponse.setClasseFiscal(classeFiscal);
+        cadastroResponse.setPreco(getPrecoFinal());
+        cadastroResponse.setUrlImagem(urlImagem);
+        cadastroResponse.setNome(nome);
+        cadastroResponse.setDescricao(descricao);
+        return cadastroResponse;
+    }
+
 }
