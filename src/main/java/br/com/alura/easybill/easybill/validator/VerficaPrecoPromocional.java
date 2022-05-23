@@ -1,6 +1,6 @@
 package br.com.alura.easybill.easybill.validator;
 
-import br.com.alura.easybill.easybill.dto.CadastroRequest;
+import br.com.alura.easybill.easybill.dto.produto.CadastroRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
 import java.util.Objects;

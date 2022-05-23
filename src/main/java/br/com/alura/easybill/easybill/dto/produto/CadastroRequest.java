@@ -1,4 +1,4 @@
-package br.com.alura.easybill.easybill.dto;
+package br.com.alura.easybill.easybill.dto.produto;
 
 import br.com.alura.easybill.easybill.model.Product;
 

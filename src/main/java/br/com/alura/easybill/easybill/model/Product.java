@@ -1,6 +1,6 @@
 package br.com.alura.easybill.easybill.model;
 
-import br.com.alura.easybill.easybill.dto.CadastroResponse;
+import br.com.alura.easybill.easybill.dto.produto.CadastroResponse;
 import br.com.alura.easybill.easybill.repository.ProductRepository;
 
 import javax.persistence.*;
