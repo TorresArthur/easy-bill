@@ -43,17 +43,17 @@ public class ClienteApiController {
     public ResponseEntity<List<ClienteResponse>> detalhaClientesPorEstado(@RequestParam(value = "estado", defaultValue = "") String estado){
         List<ClienteResponse> listaResponse = new ArrayList<>();
         ClienteResponse response = new ClienteResponse();
+        List<Cliente> listaCliente;
 
         if(estado.isEmpty()){
-            List<Cliente> listaCliente = repository.findAll();
-            listaResponse = response.fromListaCliente(listaCliente);
-            return ResponseEntity.ok(listaResponse);
-            }
-        else{
-            List<Cliente> listaCliente = repository.findByEstado(estado);
-            listaResponse = response.fromListaCliente(listaCliente);
-            return ResponseEntity.ok(listaResponse);
+            listaCliente = repository.findAll();
         }
+        else{
+            listaCliente = repository.findByEstado(estado);
+        }
+
+        listaResponse = response.fromListaCliente(listaCliente);
+        return ResponseEntity.ok(listaResponse);
     }
 
 
