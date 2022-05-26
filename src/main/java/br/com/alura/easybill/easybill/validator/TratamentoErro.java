@@ -40,4 +40,11 @@ public class TratamentoErro {
         return mensagens;
     }
 
+    @ResponseStatus(code = HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NotFoundException.class)
+    public List<MensagemErro> handler (NotFoundException exception){
+        List<MensagemErro> mensagens = new ArrayList<>();
+        mensagens.add(new MensagemErro("Cliente", exception.getMessage()));
+        return mensagens;
+    }
 }

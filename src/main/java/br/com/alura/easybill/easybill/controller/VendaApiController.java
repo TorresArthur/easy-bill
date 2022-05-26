@@ -9,6 +9,7 @@ import br.com.alura.easybill.easybill.repository.ClienteRepository;
 import br.com.alura.easybill.easybill.repository.ItemVendaRepository;
 import br.com.alura.easybill.easybill.repository.ProductRepository;
 import br.com.alura.easybill.easybill.repository.VendaRepository;
+import br.com.alura.easybill.easybill.service.VendaService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,25 +22,19 @@ public class VendaApiController {
 
     private final ItemVendaRepository itemVendaRepository;
     private final VendaRepository vendaRepository;
-    private final ClienteRepository clienteRepository;
-    private final ProductRepository productRepository;
+    private final VendaService vendaService;
 
     public VendaApiController(ItemVendaRepository itemVendaRepository,
-                              VendaRepository vendaRepository, ClienteRepository clienteRepository, ProductRepository productRepository){
+                              VendaRepository vendaRepository, VendaService vendaService){
         this.itemVendaRepository = itemVendaRepository;
         this.vendaRepository =  vendaRepository;
-        this.clienteRepository = clienteRepository;
-        this.productRepository = productRepository;
+        this.vendaService = vendaService;
     }
 
     @Transactional
     @PostMapping("api/vendas")
     public ResponseEntity<?> cadastraVenda(@RequestBody VendaRequest vendaRequest){
-
-        List<ItemVenda> itens = vendaRequest.toItemVenda(clienteRepository, productRepository);
-        itens.forEach(item -> vendaRepository.save(item.getVenda()));
-        itemVendaRepository.saveAll(itens);
-
+        vendaService.registraVenda(vendaRequest);
         return ResponseEntity.ok().build();
     }
 

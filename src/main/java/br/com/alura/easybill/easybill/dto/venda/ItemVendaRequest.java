@@ -2,6 +2,7 @@ package br.com.alura.easybill.easybill.dto.venda;
 
 import br.com.alura.easybill.easybill.model.ItemVenda;
 import br.com.alura.easybill.easybill.model.Product;
+import br.com.alura.easybill.easybill.model.Venda;
 import br.com.alura.easybill.easybill.repository.ProductRepository;
 import org.springframework.stereotype.Component;
 
@@ -43,10 +44,11 @@ public class ItemVendaRequest {
         this.produtoId = produtoId;
     }
 
-    public ItemVenda toItemVenda(ProductRepository repository){
-        ItemVenda item = new ItemVenda();
+    public ItemVenda toItemVenda(ProductRepository repository, Venda venda){
+            ItemVenda item = new ItemVenda();
             item.setObservacao(observacao);
             item.setQuantidade(quantidade);
+            item.setVenda(venda);
 
             Optional<Product> productOptional = repository.findById(produtoId);
             if(!productOptional.isPresent()){
