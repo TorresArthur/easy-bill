@@ -101,15 +101,15 @@ public class ClienteResponse {
     }
 
     public void fromCliente(Cliente cliente){
-        setBairro(cliente.getBairro());
-        setCidade(cliente.getCidade());
-        setComplemento(cliente.getComplemento());
+        setBairro(cliente.getEndereco().getBairro());
+        setCidade(cliente.getEndereco().getCidade());
+        setComplemento(cliente.getEndereco().getComplemento());
         setCpf(cliente.getCpf());
-        setEstado(cliente.getEstado());
+        setEstado(cliente.getEndereco().getEstado());
         setEmail(cliente.getEmail());
         setNome(cliente.getNome());
-        setNumero(cliente.getNumero());
-        setRua(cliente.getRua());
+        setNumero(cliente.getEndereco().getNumero());
+        setRua(cliente.getEndereco().getRua());
         setTelefone(cliente.getTelefone());
 
     }
@@ -118,15 +118,15 @@ public class ClienteResponse {
         List<ClienteResponse> listaResponse = new ArrayList<>();
         listaClientes.forEach(cliente -> {
             ClienteResponse response = new ClienteResponse();
-            response.setBairro(cliente.getBairro());
-            response.setCidade(cliente.getCidade());
-            response.setComplemento(cliente.getComplemento());
+            response.setBairro(cliente.getEndereco().getBairro());
+            response.setCidade(cliente.getEndereco().getCidade());
+            response.setComplemento(cliente.getEndereco().getComplemento());
             response.setCpf(cliente.getCpf());
-            response.setEstado(cliente.getEstado());
+            response.setEstado(cliente.getEndereco().getEstado());
             response.setEmail(cliente.getEmail());
             response.setNome(cliente.getNome());
-            response.setNumero(cliente.getNumero());
-            response.setRua(cliente.getRua());
+            response.setNumero(cliente.getEndereco().getNumero());
+            response.setRua(cliente.getEndereco().getRua());
             response.setTelefone(cliente.getTelefone());
             listaResponse.add(response);
         });

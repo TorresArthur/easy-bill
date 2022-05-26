@@ -1,6 +1,7 @@
 package br.com.alura.easybill.easybill.dto.cliente;
 
 import br.com.alura.easybill.easybill.model.Cliente;
+import br.com.alura.easybill.easybill.model.Endereco;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.constraints.*;
@@ -112,16 +113,18 @@ public class ClienteRequest {
 
     public Cliente toCliente(){
         Cliente cliente = new Cliente();
+        Endereco endereco = new Endereco();
+        endereco.setCidade(cidade);
+        endereco.setBairro(bairro);
+        endereco.setComplemento(complemento);
+        endereco.setNumero(numero);
+        endereco.setRua(rua);
+        endereco.setEstado(estado);
+        cliente.setEndereco(endereco);
 
-        cliente.setCidade(cidade);
-        cliente.setBairro(bairro);
-        cliente.setComplemento(complemento);
         cliente.setCpf(cpf);
         cliente.setNome(nome);
         cliente.setEmail(email);
-        cliente.setNumero(numero);
-        cliente.setRua(rua);
-        cliente.setEstado(estado);
         cliente.setTelefone(telefone);
         return cliente;
     }

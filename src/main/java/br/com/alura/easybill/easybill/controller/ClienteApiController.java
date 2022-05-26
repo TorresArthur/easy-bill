@@ -5,7 +5,6 @@ import br.com.alura.easybill.easybill.dto.cliente.ClienteRequest;
 import br.com.alura.easybill.easybill.dto.cliente.ClienteResponse;
 import br.com.alura.easybill.easybill.model.Cliente;
 import br.com.alura.easybill.easybill.repository.ClienteRepository;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -49,7 +48,7 @@ public class ClienteApiController {
             listaCliente = repository.findAll();
         }
         else{
-            listaCliente = repository.findByEstado(estado);
+            listaCliente = repository.findByEnderecoEstado(estado);
         }
 
         listaResponse = response.fromListaCliente(listaCliente);

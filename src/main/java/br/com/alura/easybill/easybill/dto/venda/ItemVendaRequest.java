@@ -1,11 +1,13 @@
 package br.com.alura.easybill.easybill.dto.venda;
 
 import br.com.alura.easybill.easybill.model.ItemVenda;
+import br.com.alura.easybill.easybill.model.Product;
 import br.com.alura.easybill.easybill.repository.ProductRepository;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import java.util.Optional;
 
 
 @Component
@@ -45,8 +47,18 @@ public class ItemVendaRequest {
         ItemVenda item = new ItemVenda();
             item.setObservacao(observacao);
             item.setQuantidade(quantidade);
+
+            Optional<Product> productOptional = repository.findById(produtoId);
+            if(!productOptional.isPresent()){
+            return null;
+            }
+
             item.setProduct(repository.findById(produtoId).get());
-            item.setPrecoUnitario(repository.findById(produtoId).get().getPreco());
+            if(repository.findById(produtoId).get().getPrecoPromocional() == null ) {
+                item.setPrecoUnitario(repository.findById(produtoId).get().getPreco());
+            }else{
+                item.setPrecoUnitario(repository.findById(produtoId).get().getPrecoPromocional());
+            }
 
         return item;
     }

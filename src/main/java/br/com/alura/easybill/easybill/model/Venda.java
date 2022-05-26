@@ -8,8 +8,9 @@ import java.time.LocalDateTime;
 public class Venda {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDateTime dataVenda;
-    private Enum<Status> status;
+    private LocalDateTime dataVenda = LocalDateTime.now();
+    @Enumerated(value = EnumType.STRING)
+    private Status status;
     @ManyToOne
     private Cliente cliente;
 
@@ -29,11 +30,11 @@ public class Venda {
         this.dataVenda = dataVenda.now();
     }
 
-    public Enum<Status> getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(Enum<Status> status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

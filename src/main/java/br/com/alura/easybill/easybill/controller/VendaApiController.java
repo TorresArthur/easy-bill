@@ -12,19 +12,17 @@ import br.com.alura.easybill.easybill.repository.VendaRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
-
-import static br.com.alura.easybill.easybill.model.Status.REALIZADA;
 
 @RestController
 public class VendaApiController {
 
-    private ItemVendaRepository itemVendaRepository;
-    private VendaRepository vendaRepository;
-    private ClienteRepository clienteRepository;
-    private ProductRepository productRepository;
+    private final ItemVendaRepository itemVendaRepository;
+    private final VendaRepository vendaRepository;
+    private final ClienteRepository clienteRepository;
+    private final ProductRepository productRepository;
 
     public VendaApiController(ItemVendaRepository itemVendaRepository,
                               VendaRepository vendaRepository, ClienteRepository clienteRepository, ProductRepository productRepository){
@@ -34,21 +32,15 @@ public class VendaApiController {
         this.productRepository = productRepository;
     }
 
+    @Transactional
     @PostMapping("api/vendas")
-    public void cadastraVenda(@RequestBody VendaRequest vendaRequest){
+    public ResponseEntity<?> cadastraVenda(@RequestBody VendaRequest vendaRequest){
 
-        Venda venda = new Venda();
-        venda.setCliente(vendaRequest.retornaCliente(clienteRepository));
-        venda.setDataVenda(LocalDateTime.now());
-        venda.setStatus(REALIZADA);
-
-        List<ItemVenda> itens = vendaRequest.retornaListaItemVenda(productRepository);
+        List<ItemVenda> itens = vendaRequest.toItemVenda(clienteRepository, productRepository);
+        itens.forEach(item -> vendaRepository.save(item.getVenda()));
         itemVendaRepository.saveAll(itens);
 
-        itens.forEach(item ->{
-            item.setVenda(venda);
-        });
-        vendaRepository.save(venda);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/api/vendas/{id}")
