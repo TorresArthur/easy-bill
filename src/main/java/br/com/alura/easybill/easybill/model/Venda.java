@@ -1,7 +1,6 @@
 package br.com.alura.easybill.easybill.model;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -11,7 +10,8 @@ public class Venda {
     private LocalDateTime dataVenda = LocalDateTime.now();
     @Enumerated(value = EnumType.STRING)
     private Status status;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.EAGER)
     private Cliente cliente;
 
     public Long getId() {

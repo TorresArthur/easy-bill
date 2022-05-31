@@ -50,6 +50,7 @@ public class VendaResponse {
         setDataRealizacao(venda.getDataVenda().toString());
         setId(venda.getId());
 
+
         List<ItemVendaResponse> listaResponse = new ArrayList<>();
         itens.forEach(item -> {
             ItemVendaResponse itemVendaResponse = new ItemVendaResponse();

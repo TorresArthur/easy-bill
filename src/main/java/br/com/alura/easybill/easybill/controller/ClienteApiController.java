@@ -40,7 +40,6 @@ public class ClienteApiController {
 
     @GetMapping("admin/clientes")
     public ResponseEntity<List<ClienteResponse>> detalhaClientesPorEstado(@RequestParam(value = "estado", defaultValue = "") String estado){
-        List<ClienteResponse> listaResponse = new ArrayList<>();
         ClienteResponse response = new ClienteResponse();
         List<Cliente> listaCliente;
 
@@ -51,7 +50,7 @@ public class ClienteApiController {
             listaCliente = repository.findByEnderecoEstado(estado);
         }
 
-        listaResponse = response.fromListaCliente(listaCliente);
+        List<ClienteResponse> listaResponse = response.fromListaCliente(listaCliente);
         return ResponseEntity.ok(listaResponse);
     }
 

@@ -1,13 +1,12 @@
 package br.com.alura.easybill.easybill.controller;
 
 
-import br.com.alura.easybill.easybill.dto.venda.VendaResponse;
 import br.com.alura.easybill.easybill.dto.venda.VendaRequest;
+import br.com.alura.easybill.easybill.dto.venda.VendaResponse;
+import br.com.alura.easybill.easybill.dto.venda.VendasPorProdutoProjection;
 import br.com.alura.easybill.easybill.model.ItemVenda;
 import br.com.alura.easybill.easybill.model.Venda;
-import br.com.alura.easybill.easybill.repository.ClienteRepository;
 import br.com.alura.easybill.easybill.repository.ItemVendaRepository;
-import br.com.alura.easybill.easybill.repository.ProductRepository;
 import br.com.alura.easybill.easybill.repository.VendaRepository;
 import br.com.alura.easybill.easybill.service.VendaService;
 import org.springframework.http.ResponseEntity;
@@ -41,13 +40,21 @@ public class VendaApiController {
     @GetMapping("/api/vendas/{id}")
     public ResponseEntity<VendaResponse> detalhaVenda(@PathVariable Long id){
         Optional<Venda> optionalVenda = vendaRepository.findById(id);
+
         if(!optionalVenda.isPresent()) {
             return ResponseEntity.badRequest().build();
         }
+
         Venda venda = vendaRepository.findById(id).get();
         List<ItemVenda> itens = itemVendaRepository.findItensVendaPorVenda(id);
         VendaResponse vendaResponse = new VendaResponse();
         vendaResponse.fromVenda(venda, itens);
+
         return ResponseEntity.ok(vendaResponse);
+    }
+
+    @GetMapping("/api/amdin/relatorios/vendas-por-produto")
+    public List<VendasPorProdutoProjection> retornaRelatorioVendas(){
+        return itemVendaRepository.findProdutoPorQuantidade();
     }
 }

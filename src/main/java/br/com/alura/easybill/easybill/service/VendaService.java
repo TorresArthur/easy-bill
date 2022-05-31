@@ -36,18 +36,28 @@ public class VendaService {
     public void registraVenda(VendaRequest vendaRequest) {
         Cliente cliente = clienteRepository.findById(vendaRequest.getClienteId())
                 .orElseThrow(() -> new NotFoundException("Não encontrado cliente: " + vendaRequest.getClienteId()));
-        Venda venda = new Venda();
-        venda.setCliente(cliente);
-        venda.setDataVenda(LocalDateTime.now());
-        venda.setStatus(REALIZADA);
+        Venda venda = getVenda(cliente);
         vendaRepository.save(venda);
 
+        List<ItemVenda> itens = getItemVendas(vendaRequest, venda);
+        itemVendaRepository.saveAll(itens);
+    }
+
+    private List<ItemVenda> getItemVendas(VendaRequest vendaRequest, Venda venda) {
         List<ItemVenda> itens = new ArrayList<>();
         vendaRequest.getItens().forEach(itemRequest ->
                 itens.add(itemRequest.toItemVenda(productRepository, venda))
 
         );
-        itemVendaRepository.saveAll(itens);
+        return itens;
+    }
+
+    private Venda getVenda(Cliente cliente) {
+        Venda venda = new Venda();
+        venda.setCliente(cliente);
+        venda.setDataVenda(LocalDateTime.now());
+        venda.setStatus(REALIZADA);
+        return venda;
     }
 
 }

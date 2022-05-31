@@ -1,6 +1,7 @@
 package br.com.alura.easybill.easybill.dto;
 
 import br.com.alura.easybill.easybill.model.Product;
+import org.springframework.data.domain.Page;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -81,4 +82,5 @@ public class ShowProduct {
             return showProduct;
         }).collect(Collectors.toList());
     }
+
 }

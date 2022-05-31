@@ -6,6 +6,7 @@ import br.com.alura.easybill.easybill.dto.ShowProduct;
 import br.com.alura.easybill.easybill.model.Product;
 import br.com.alura.easybill.easybill.validator.VerficaPrecoPromocional;
 import br.com.alura.easybill.easybill.repository.ProductRepository;
+import org.springframework.data.domain.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -14,7 +15,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.List;
 import java.util.Optional;
 
 
@@ -33,9 +33,11 @@ public class ProductApiController {
 
 
     @GetMapping("produtos")
-    public List<ShowProduct> retornaLista(){
-        List<Product> lista = productRepository.findAll();
-        return ShowProduct.toShowProductList(lista);
+    public Page<ShowProduct> retornaLista(@RequestParam Integer numeroPagina){
+
+        Pageable pageable = PageRequest.of(numeroPagina, 5, Sort.by(Sort.Direction.DESC, "nome"));
+
+        return productRepository.findAll(pageable).map(ShowProduct::toShowProduct);
     }
 
     @GetMapping("/produtos/{id}")

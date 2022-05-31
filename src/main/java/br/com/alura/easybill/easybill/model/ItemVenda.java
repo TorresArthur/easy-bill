@@ -13,9 +13,11 @@ public class ItemVenda {
     private String observacao;
     private BigDecimal precoUnitario;
     private BigDecimal getPrecoUnitarioPromocional;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     private Venda venda;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     private Product product;
 
     public Long getId() {
