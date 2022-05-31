@@ -27,7 +27,7 @@ public class Venda {
     }
 
     public void setDataVenda(LocalDateTime dataVenda) {
-        this.dataVenda = dataVenda.now();
+        this.dataVenda = dataVenda;
     }
 
     public Status getStatus() {
