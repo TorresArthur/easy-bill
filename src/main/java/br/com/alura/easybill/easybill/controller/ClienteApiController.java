@@ -1,8 +1,8 @@
 package br.com.alura.easybill.easybill.controller;
 
 
-import br.com.alura.easybill.easybill.dto.cliente.ClienteRequest;
 import br.com.alura.easybill.easybill.dto.cliente.ClienteResponse;
+import br.com.alura.easybill.easybill.dto.cliente.ClienteRequest;
 import br.com.alura.easybill.easybill.model.Cliente;
 import br.com.alura.easybill.easybill.repository.ClienteRepository;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +11,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

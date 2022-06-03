@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface ItemVendaRepository extends JpaRepository<ItemVenda, Long> {
 
-    @Query(value = "SELECT p.nome AS nome, SUM(i.quantidade) AS quantidade FROM product p JOIN itemvenda i WHERE i.product_id = p.id GROUP BY (p.nome)", nativeQuery=true)
+    @Query(value = "SELECT p.nome AS nomeProduto, SUM(i.quantidade) AS quantidadeProduto FROM product p JOIN itemvenda i WHERE i.product_id = p.id GROUP BY (p.nome)", nativeQuery=true)
     List<VendasPorProdutoProjection> findProdutoPorQuantidade();
 
     @Query(value = "SELECT * FROM itemvenda i WHERE i.venda_id = :id", nativeQuery = true)

@@ -3,6 +3,7 @@ package br.com.alura.easybill.easybill.service;
 import br.com.alura.easybill.easybill.dto.venda.VendaRequest;
 import br.com.alura.easybill.easybill.model.Cliente;
 import br.com.alura.easybill.easybill.model.ItemVenda;
+import br.com.alura.easybill.easybill.model.Status;
 import br.com.alura.easybill.easybill.model.Venda;
 import br.com.alura.easybill.easybill.repository.ClienteRepository;
 import br.com.alura.easybill.easybill.repository.ItemVendaRepository;
@@ -14,8 +15,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
-import static br.com.alura.easybill.easybill.model.Status.REALIZADA;
 
 @Service
 public class VendaService {
@@ -56,7 +55,7 @@ public class VendaService {
         Venda venda = new Venda();
         venda.setCliente(cliente);
         venda.setDataVenda(LocalDateTime.now());
-        venda.setStatus(REALIZADA);
+        venda.setStatus(Status.REALIZADA);
         return venda;
     }
 

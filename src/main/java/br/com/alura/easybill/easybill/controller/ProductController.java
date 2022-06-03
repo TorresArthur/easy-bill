@@ -1,6 +1,6 @@
 package br.com.alura.easybill.easybill.controller;
-import br.com.alura.easybill.easybill.dto.produto.CadastroRequest;
 import br.com.alura.easybill.easybill.dto.ShowProduct;
+import br.com.alura.easybill.easybill.dto.produto.CadastroRequest;
 import br.com.alura.easybill.easybill.model.Product;
 import br.com.alura.easybill.easybill.validator.VerficaPrecoPromocional;
 import br.com.alura.easybill.easybill.repository.ProductRepository;

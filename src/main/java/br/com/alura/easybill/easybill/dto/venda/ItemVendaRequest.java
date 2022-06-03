@@ -1,9 +1,9 @@
 package br.com.alura.easybill.easybill.dto.venda;
 
 import br.com.alura.easybill.easybill.model.ItemVenda;
-import br.com.alura.easybill.easybill.model.Product;
 import br.com.alura.easybill.easybill.model.Venda;
 import br.com.alura.easybill.easybill.repository.ProductRepository;
+import br.com.alura.easybill.easybill.model.Product;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
