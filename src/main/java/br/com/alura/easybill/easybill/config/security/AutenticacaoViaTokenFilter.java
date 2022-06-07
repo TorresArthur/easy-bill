@@ -2,7 +2,6 @@ package br.com.alura.easybill.easybill.config.security;
 
 import br.com.alura.easybill.easybill.model.Usuario;
 import br.com.alura.easybill.easybill.repository.UsuarioRepository;
-import br.com.alura.easybill.easybill.service.TokenService;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;

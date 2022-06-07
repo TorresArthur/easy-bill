@@ -6,6 +6,8 @@ import br.com.alura.easybill.easybill.dto.ShowProduct;
 import br.com.alura.easybill.easybill.model.Product;
 import br.com.alura.easybill.easybill.validator.VerficaPrecoPromocional;
 import br.com.alura.easybill.easybill.repository.ProductRepository;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BeanPropertyBindingResult;
@@ -32,12 +34,21 @@ public class ProductApiController {
     }
 
 
-    @GetMapping("produtos")
-    public Page<ShowProduct> retornaLista(@RequestParam Integer numeroPagina){
+    @GetMapping("produtos") @Cacheable(value = "listaDeProdutos")
+    public Page<ShowProduct> retornaLista(@RequestParam(value = "pagina", defaultValue = "") Integer pagina){
 
-        Pageable pageable = PageRequest.of(numeroPagina, 5, Sort.by(Sort.Direction.DESC, "nome"));
+        if(pagina == null){
+            pagina = 0;
+        }
+        Pageable pageable = PageRequest.of(pagina, 5, Sort.by(Sort.Direction.DESC, "nome"));
 
         return productRepository.findAll(pageable).map(ShowProduct::toShowProduct);
+    }
+
+
+    @PostMapping("aW52YWxpZGEgY2FjaGUgbGlzdGFnZW0gcHJvZHV0b3M")
+    @CacheEvict(value = "listaDeProdutos", allEntries = true)
+    public void invalidaCache(){
     }
 
     @GetMapping("/produtos/{id}")

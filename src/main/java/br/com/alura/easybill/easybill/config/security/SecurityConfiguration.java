@@ -2,8 +2,6 @@ package br.com.alura.easybill.easybill.config.security;
 
 
 import br.com.alura.easybill.easybill.repository.UsuarioRepository;
-import br.com.alura.easybill.easybill.service.AutenticacaoService;
-import br.com.alura.easybill.easybill.service.TokenService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -52,7 +50,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         http.authorizeRequests()
-                .antMatchers("/api/admin/*").authenticated()
+                .antMatchers("/api/admin/**").authenticated()
                 .antMatchers("/admin/*").authenticated()
                 .anyRequest().permitAll()
                 .and().csrf().disable()

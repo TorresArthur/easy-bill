@@ -1,4 +1,4 @@
-package br.com.alura.easybill.easybill.service;
+package br.com.alura.easybill.easybill.config.security;
 
 import br.com.alura.easybill.easybill.model.Usuario;
 import io.jsonwebtoken.Claims;

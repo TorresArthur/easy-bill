@@ -1,4 +1,4 @@
-package br.com.alura.easybill.easybill.service;
+package br.com.alura.easybill.easybill.config.security;
 
 import br.com.alura.easybill.easybill.model.Usuario;
 import br.com.alura.easybill.easybill.repository.UsuarioRepository;
@@ -21,7 +21,6 @@ public class AutenticacaoService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<Usuario> usuarioOptional = usuarioRepository.findByEmail(username);
-        System.out.println(usuarioOptional.get());
         if (usuarioOptional.isPresent()) return usuarioOptional.get();
 
 

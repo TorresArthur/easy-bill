@@ -8,7 +8,6 @@ import org.springframework.data.web.config.EnableSpringDataWebSupport;
 @SpringBootApplication
 @EnableSpringDataWebSupport
 @EnableCaching
-//@EnableSwagger2
 public class EasybillApplication {
 
 	public static void main(String[] args) {

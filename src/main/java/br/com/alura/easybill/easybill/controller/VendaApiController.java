@@ -53,7 +53,7 @@ public class VendaApiController {
         return ResponseEntity.ok(vendaResponse);
     }
 
-    @GetMapping("/api/amdin/relatorios/vendas-por-produto")
+    @GetMapping("/api/admin/relatorios/vendas-por-produto")
     public List<VendasPorProdutoProjection> retornaRelatorioVendas(){
         return itemVendaRepository.findProdutoPorQuantidade();
     }
