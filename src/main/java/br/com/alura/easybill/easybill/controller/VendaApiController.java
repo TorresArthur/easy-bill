@@ -8,11 +8,13 @@ import br.com.alura.easybill.easybill.model.Venda;
 import br.com.alura.easybill.easybill.model.ItemVenda;
 import br.com.alura.easybill.easybill.repository.ItemVendaRepository;
 import br.com.alura.easybill.easybill.repository.VendaRepository;
-import br.com.alura.easybill.easybill.service.VendaService;
+import br.com.alura.easybill.easybill.repository.service.VendaService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.transaction.Transactional;
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,9 +34,10 @@ public class VendaApiController {
 
     @Transactional
     @PostMapping("api/vendas")
-    public ResponseEntity<?> cadastraVenda(@RequestBody VendaRequest vendaRequest){
-        vendaService.registraVenda(vendaRequest);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<?> cadastraVenda(@RequestBody VendaRequest vendaRequest, UriComponentsBuilder uriBuilder){
+        Venda venda = vendaService.registraVenda(vendaRequest);
+        URI uri = uriBuilder.path("/api/vendas/{id}").buildAndExpand(venda.getId()).toUri();
+        return ResponseEntity.created(uri).build();
     }
 
     @GetMapping("/api/vendas/{id}")

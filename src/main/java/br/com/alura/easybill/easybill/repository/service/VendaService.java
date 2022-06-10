@@ -1,4 +1,4 @@
-package br.com.alura.easybill.easybill.service;
+package br.com.alura.easybill.easybill.repository.service;
 
 import br.com.alura.easybill.easybill.dto.venda.VendaRequest;
 import br.com.alura.easybill.easybill.model.Cliente;
@@ -32,7 +32,7 @@ public class VendaService {
     }
 
 
-    public void registraVenda(VendaRequest vendaRequest) {
+    public Venda registraVenda(VendaRequest vendaRequest) {
         Cliente cliente = clienteRepository.findById(vendaRequest.getClienteId())
                 .orElseThrow(() -> new NotFoundException("Não encontrado cliente: " + vendaRequest.getClienteId()));
         Venda venda = getVenda(cliente);
@@ -40,6 +40,7 @@ public class VendaService {
 
         List<ItemVenda> itens = getItemVendas(vendaRequest, venda);
         itemVendaRepository.saveAll(itens);
+        return venda;
     }
 
     private List<ItemVenda> getItemVendas(VendaRequest vendaRequest, Venda venda) {

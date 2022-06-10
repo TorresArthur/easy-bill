@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
+//@Profile("producao")
 public class AutenticacaoService implements UserDetailsService {
     private UsuarioRepository usuarioRepository;
 

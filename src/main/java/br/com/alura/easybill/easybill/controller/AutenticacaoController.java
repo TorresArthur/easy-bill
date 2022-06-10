@@ -1,9 +1,9 @@
 package br.com.alura.easybill.easybill.controller;
 
 
+import br.com.alura.easybill.easybill.config.security.TokenService;
 import br.com.alura.easybill.easybill.dto.LoginRequest;
 import br.com.alura.easybill.easybill.dto.TokenResponse;
-import br.com.alura.easybill.easybill.config.security.TokenService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -18,6 +18,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/auth")
+//@Profile("producao")
 public class AutenticacaoController {
 
 
